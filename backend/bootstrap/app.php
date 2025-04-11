@@ -87,6 +87,7 @@ $app->configure('app');
 
 
 $app->routeMiddleware([
+     App\Http\Middleware\CorsMiddleware::class,
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
@@ -124,5 +125,7 @@ $app->router->group([
 ], function ($router) {
     require __DIR__ . '/../routes/web.php';
 });
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+$app->configure('jwt');
 
 return $app;
